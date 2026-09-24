@@ -1,7 +1,12 @@
 # SwayAudioIdleInhibit
 
 Prevents swayidle/hypridle from sleeping while any application is outputting or
-receiving audio. Requires systemd/elogind inhibit support.
+receiving audio.
+
+Idling is inhibited through the compositors idle-inhibit protocol
+(`zwp_idle_inhibit_manager_v1`), which is the mechanism swayidle/hypridle
+actually react to. A systemd/elogind "idle" inhibitor is taken as well when
+available, but it is optional.
 
 This only works for Pulseaudio / Pipewire Pulse
 
@@ -30,7 +35,7 @@ meson install -C build
 In addition to the c++ compiler of your choosing:
 
 ```bash
-apt install meson pkgconf libsystemd-dev libpulse-dev
+apt install meson pkgconf libsystemd-dev libpulse-dev libwayland-dev wayland-protocols
 ```
 
 ## Sway Usage
